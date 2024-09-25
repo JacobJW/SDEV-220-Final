@@ -29,9 +29,9 @@ class Product(models.Model):
 
 class Order(models.Model):
     order_id = models.IntegerField(primary_key=True)
-    user_id = models.ForeignKey(User) # who placed the order
-    loc_id = models.ForeignKey(Location) # where the order is placed
-    order_total = models.FloatField(null=True) # combined cost of all items
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE) # who placed the order
+    loc_id = models.ForeignKey(Location,on_delete=models.CASCADE) # where the order is placed
+    item_total = models.FloatField(null=True) # combined cost of all items
     tax = models.FloatField(null=True) # additional tax cost, assuming an 8% sales tax rate
     tip = models.FloatField(null=True) # additional tip cost, if applicable
     final_total = models.FloatField(null=True) # final price once tax and tip are factored in
@@ -40,9 +40,9 @@ class Order(models.Model):
         return str('Order NO:',self.order_id)
     
 class OrderItem(models.Model):
-    order_id = models.ForeignKey(Order) # which order this item belongs to
+    order_id = models.ForeignKey(Order,on_delete=models.CASCADE) # which order this item belongs to
     item_no = models.IntegerField(null=True) # item number, relative to order
-    product_id = models.ForeignKey(Product) # product ordered
+    product_id = models.ForeignKey(Product,on_delete=models.CASCADE) # product ordered
     quantity = models.IntegerField(null=True) # count of this same item in the order
 
     def __str__(self):
