@@ -1,7 +1,7 @@
 # This file will contain function definitions for app use
 import math
 import datetime
-from ..models import *
+from finalstore.storeapp.models import *
 
 def CalculatePrice(order_id:int,tip_amount:float):
     order = Order.objects.get(order_id=order_id) # Get the order

@@ -1,4 +1,9 @@
 from django.db import models
+from django import setup
+import os
+
+os.environ["DJANGO_SETTINGS_MODULE"] = "finalstore.settings"
+setup()
 
 # Create your models here.
 class Location(models.Model):
